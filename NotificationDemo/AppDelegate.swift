@@ -75,5 +75,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("actionIdentifier \(response.actionIdentifier)")
         
         completionHandler()
+        
+        guard let linkString: String = content.userInfo["link"] as? String else { return }
+        guard let requestUrl = URL(string: linkString) else { return }
+        UIApplication.shared.open(requestUrl, options: [:], completionHandler: nil)
     }
 }
